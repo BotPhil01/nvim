@@ -23,7 +23,7 @@ vim.cmd("map <leader>[ vi[");
 vim.cmd("map <leader>] vi]");
 vim.cmd("map <leader>' vi'");
 vim.cmd('map <leader>" vi"');
-
+vim.cmd("tnoremap <Esc> <C-\\><C-n>");
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
