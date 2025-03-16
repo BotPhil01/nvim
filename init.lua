@@ -2,6 +2,7 @@ vim.cmd("set expandtab")
 vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
 vim.cmd("set shiftwidth=4")
+vim.cmd('set foldmethod=indent')
 vim.cmd("set nu")
 vim.cmd("set relativenumber")
 vim.cmd("set nowrap")
@@ -23,7 +24,10 @@ vim.cmd("map <leader>[ vi[");
 vim.cmd("map <leader>] vi]");
 vim.cmd("map <leader>' vi'");
 vim.cmd('map <leader>" vi"');
-vim.cmd("tnoremap <Esc> <C-\\><C-n>");
+vim.cmd('tnoremap <Esc> <C-\\><C-n>');
+vim.cmd('noremap / /<Bslash>c')
+vim.cmd('noremap <leader>/ /')
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -50,7 +54,6 @@ local plugins = {
     },
     {'ThePrimeagen/harpoon',
         dependencies = { 'nvim-lua/plenary.nvim' }},
-    {'mbbill/undotree'},
     {'nvim-treesitter/nvim-treesitter'},
     {'VonHeikemen/lsp-zero.nvim'},
     {'neovim/nvim-lspconfig'},
@@ -58,25 +61,42 @@ local plugins = {
     {'hrsh7th/nvim-cmp'},
     {"williamboman/mason.nvim"},
     {"williamboman/mason-lspconfig.nvim"},
-    {"neovim/nvim-lspconfig"},
     {'numToStr/Comment.nvim',
         opts = {
-            -- add any options here
-        }
+       }
     }
 }
 
 local opts = {}
 require("lazy").setup(plugins, opts)
 
+-- telescope config
 local builtin = require("telescope.builtin")
+local telescopeConfig = require('telescope.config')
+local vimgrep_args = { unpack(telescopeConfig.values.vimgrep_arguments) }
+
+table.insert(vimgrep_args, '--hidden')
+table.insert(vimgrep_args, '--glob')
+table.insert(vimgrep_args, '!**/.git/*')
+require('telescope').setup({
+    defaults = {
+        vimgrep_arguments = vimgrep_args
+    },
+    pickers = {
+        find_files = {
+            find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+
+        },
+    }
+})
+
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = 'Telescope find' })
 vim.keymap.set("n", "<leader>g", builtin.live_grep, { desc = 'Telescope grep' })
 
 local config = require("nvim-treesitter.configs")
 config.setup {
-    ensure_installed = { "lua","vim", "vimdoc", "c", "cpp", "javascript", "typescript", "java", "python", "markdown", "markdown_inline" },
-    auto_install = true,
+    ensure_installed = { "lua", "vim", "vimdoc", "c", "cpp", "javascript", "typescript", "java", "python", "markdown", "markdown_inline" },
+    auto_install = false,
     highlight = { enable = true },
     indent = { enable = true },
 }
@@ -89,9 +109,6 @@ vim.keymap.set("n", "<leader>h", require("harpoon.ui").toggle_quick_menu, { desc
 require("nightfox").setup()
 vim.cmd("colorscheme nightfox")
 
--- setup for undotree
-vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
-
 -- setup for mason
 require('mason').setup()
 
@@ -99,7 +116,15 @@ require('mason-lspconfig').setup({
     ensure_installed = { 'lua_ls' },
     handlers = {
         function(server_name)
-            require('lspconfig')[server_name].setup({})
+            require('lspconfig')[server_name].setup({
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { 'vim' },
+                        }
+                    }
+                }
+            })
         end,
     },
 })
