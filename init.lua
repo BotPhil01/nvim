@@ -59,6 +59,11 @@ local plugins = {
     {"williamboman/mason.nvim"},
     {"williamboman/mason-lspconfig.nvim"},
     {"neovim/nvim-lspconfig"},
+    {'numToStr/Comment.nvim',
+        opts = {
+            -- add any options here
+        }
+    }
 }
 
 local opts = {}
@@ -88,7 +93,7 @@ vim.cmd("colorscheme nightfox")
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 
 -- setup for mason
-local mason = require('mason').setup()
+require('mason').setup()
 
 require('mason-lspconfig').setup({
     ensure_installed = { 'lua_ls' },
@@ -110,7 +115,7 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)
-    local opts = {buffer = event.buf}
+    opts = {buffer = event.buf}
         vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
         vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
         vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
@@ -132,7 +137,7 @@ cmp.setup({
     {name = 'nvim_lsp'},
     {
         name = 'buffer',
-        option = 
+        option =
                 {
                     keyword_length = 1,
                 }
@@ -146,3 +151,12 @@ cmp.setup({
   },
   mapping = cmp.mapping.preset.insert({}),
 })
+
+require('Comment').setup(
+    {
+        extra = {
+            above = 'gck',
+            below = 'gcj',
+        }
+    }
+)
