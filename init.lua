@@ -61,10 +61,8 @@ local plugins = {
     {'hrsh7th/nvim-cmp'},
     {"williamboman/mason.nvim"},
     {"williamboman/mason-lspconfig.nvim"},
-    {'numToStr/Comment.nvim',
-        opts = {
-       }
-    }
+    {"neovim/nvim-lspconfig"},
+    {'numToStr/Comment.nvim'},
 }
 
 local opts = {}
@@ -179,6 +177,7 @@ cmp.setup({
 
 require('Comment').setup(
     {
+        ignore = '^$',
         extra = {
             above = 'gck',
             below = 'gcj',
