@@ -16,17 +16,11 @@ vim.opt.isfname:append("@-@")
 vim.g.mapleader= " "
 
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
-vim.cmd("map <leader>( vi(");
-vim.cmd("map <leader>) vi)");
-vim.cmd("map <leader>{ vi{");
-vim.cmd("map <leader>} vi}");
-vim.cmd("map <leader>[ vi[");
-vim.cmd("map <leader>] vi]");
-vim.cmd("map <leader>' vi'");
-vim.cmd('map <leader>" vi"');
 vim.cmd('tnoremap <Esc> <C-\\><C-n>');
 vim.cmd('noremap / /<Bslash>c')
+vim.cmd('noremap ? ?<Bslash>c')
 vim.cmd('noremap <leader>/ /')
+vim.cmd('nnoremap <leader>r <cmd>lua vim.diagnostic.open_float()<CR>')
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -184,3 +178,15 @@ require('Comment').setup(
         }
     }
 )
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+        virtual_text = true,
+        signs = true,
+        update_in_insert = false,
+        underline = true,
+        float = true,
+    }
+)
+
