@@ -13,6 +13,7 @@ vim.cmd("set scrolloff=8")
 vim.cmd("set signcolumn=yes")
 vim.opt.isfname:append("@-@")
 vim.opt.smartindent = false
+vim.o.clipboard = 'unnamedplus'
 
 vim.g.mapleader= " "
 
@@ -33,7 +34,6 @@ vim.cmd('noremap <Space>d d')
 
 vim.cmd('vnoremap p "_dP')
 vim.cmd('vnoremap P "_dP')
-
 
 vim.cmd('noremap <leader>/ /')
 vim.cmd('nnoremap <leader>r <cmd>lua vim.diagnostic.open_float()<CR>')
