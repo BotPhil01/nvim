@@ -11,6 +11,7 @@ vim.cmd("set incsearch")
 vim.cmd("set termguicolors")
 vim.cmd("set scrolloff=8")
 vim.cmd("set signcolumn=yes")
+vim.cmd("set clipboard=unnamedplus")
 vim.opt.isfname:append("@-@")
 
 vim.g.mapleader= " "
@@ -19,6 +20,21 @@ vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 vim.cmd('tnoremap <Esc> <C-\\><C-n>');
 vim.cmd('noremap / /<Bslash>c')
 vim.cmd('noremap ? ?<Bslash>c')
+
+
+-- delete does not copy 
+vim.cmd('vnoremap d "_d')
+vim.cmd('nnoremap dd "_dd')
+vim.cmd('noremap d "_d')
+vim.cmd('noremap x "_x')
+vim.cmd('noremap X "_X')
+vim.cmd('noremap <Space>dd dd')
+vim.cmd('noremap <Space>d d')
+
+vim.cmd('vnoremap p "_dP')
+vim.cmd('vnoremap P "_dP')
+
+
 vim.cmd('noremap <leader>/ /')
 vim.cmd('nnoremap <leader>r <cmd>lua vim.diagnostic.open_float()<CR>')
 
