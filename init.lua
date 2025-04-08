@@ -11,8 +11,8 @@ vim.cmd("set incsearch")
 vim.cmd("set termguicolors")
 vim.cmd("set scrolloff=8")
 vim.cmd("set signcolumn=yes")
-vim.cmd("set clipboard=unnamedplus")
 vim.opt.isfname:append("@-@")
+vim.opt.smartindent = false
 
 vim.g.mapleader= " "
 
@@ -106,7 +106,7 @@ config.setup {
     ensure_installed = { "lua", "vim", "vimdoc", "c", "cpp", "javascript", "typescript", "java", "python", "markdown", "markdown_inline" },
     auto_install = false,
     highlight = { enable = true },
-    indent = { enable = true },
+    indent = { enable = false },
 }
 
 -- harpoon setup
