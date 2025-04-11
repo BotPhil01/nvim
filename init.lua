@@ -22,15 +22,10 @@ vim.cmd('tnoremap <Esc> <C-\\><C-n>');
 vim.cmd('noremap / /<Bslash>c')
 vim.cmd('noremap ? ?<Bslash>c')
 
-
 -- delete does not copy 
-vim.cmd('vnoremap d "_d')
-vim.cmd('nnoremap dd "_dd')
-vim.cmd('noremap d "_d')
+vim.keymap.set('', '<leader>d', '"_d');
 vim.cmd('noremap x "_x')
 vim.cmd('noremap X "_X')
-vim.cmd('noremap <Space>dd dd')
-vim.cmd('noremap <Space>d d')
 
 vim.cmd('vnoremap p "_dP')
 vim.cmd('vnoremap P "_dP')
@@ -57,6 +52,7 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
     { "EdenEast/nightfox.nvim", name = "nightfox", priority = 1000 },
     -- init.lua:
+    {'BurntSushi/ripgrep', name = "ripgrep", priority = 900 },
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = {
@@ -78,10 +74,12 @@ local plugins = {
 local opts = {}
 require("lazy").setup(plugins, opts)
 
+
 -- telescope config
 local builtin = require("telescope.builtin")
 local telescopeConfig = require('telescope.config')
-local vimgrep_args = { unpack(telescopeConfig.values.vimgrep_arguments) }
+table.unpack = unpack or table.unpack -- compatibility
+local vimgrep_args = { table.unpack(telescopeConfig.values.vimgrep_arguments) }
 
 table.insert(vimgrep_args, '--hidden')
 table.insert(vimgrep_args, '--glob')
