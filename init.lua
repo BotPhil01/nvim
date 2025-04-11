@@ -9,7 +9,7 @@ vim.opt.foldmethod = 'indent'
 -- line options
 vim.opt.nu = true
 vim.opt.relativenumber = true
-vim.optowrap = false
+vim.opt.wrap = false
 -- searching options
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
@@ -42,7 +42,7 @@ vim.keymap.set('', '<leader>d', '"_d', {noremap = true});
 vim.keymap.set('', 'x', '"_x', {noremap = true})
 vim.keymap.set('', 'X', '"_X', {noremap = true})
 
-vim.keymap.set('v', 'p', '"_dP', {noremap = true})
+vim.keymap.set('v', 'p', '"_dp', {noremap = true})
 vim.keymap.set('v', 'P', '"_dP', {noremap = true})
 
 vim.keymap.set('', '<leader>/' ,'/', {noremap = true})
