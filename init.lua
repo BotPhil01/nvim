@@ -9,9 +9,9 @@ vim.opt.foldmethod = 'indent'
 -- line options
 vim.opt.nu = true
 vim.opt.relativenumber = true
-vim.opt.nowrap = true
+vim.optowrap = false
 -- searching options
-vim.opt.nohlsearch = true
+vim.opt.hlsearch = false
 vim.opt.incsearch = true
 -- gui stuff
 vim.opt.termguicolors = true
