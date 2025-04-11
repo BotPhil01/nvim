@@ -1,37 +1,52 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=4")
-vim.cmd("set softtabstop=4")
-vim.cmd("set shiftwidth=4")
-vim.cmd('set foldmethod=indent')
-vim.cmd("set nu")
-vim.cmd("set relativenumber")
-vim.cmd("set nowrap")
-vim.cmd("set nohlsearch")
-vim.cmd("set incsearch")
-vim.cmd("set termguicolors")
-vim.cmd("set scrolloff=8")
-vim.cmd("set signcolumn=yes")
+-- tab optiosn
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+
+-- folding 
+vim.opt.foldmethod = 'indent'
+-- line options
+vim.opt.nu = true
+vim.opt.relativenumber = true
+vim.opt.nowrap = true
+-- searching options
+vim.opt.nohlsearch = true
+vim.opt.incsearch = true
+-- gui stuff
+vim.opt.termguicolors = true
+vim.opt.scrolloff = 10
+vim.opt.signcolumn = 'yes'
 vim.opt.isfname:append("@-@")
+-- for use with lspzero 
 vim.opt.smartindent = false
+
+-- clipboard copy and paste is mapped to yank and paste in nvim
+-- requires xclip on linux see https://github.com/astrand/xclip
 vim.o.clipboard = 'unnamedplus'
 
 vim.g.mapleader= " "
 
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
-vim.cmd('tnoremap <Esc> <C-\\><C-n>');
-vim.cmd('noremap / /<Bslash>c')
-vim.cmd('noremap ? ?<Bslash>c')
+-- file explorer
+vim.keymap.set('n', '<leader>e', vim.cmd.Ex, {noremap = true})
+-- terminal exit
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', {noremap = true})
+-- case insensitive find
+vim.keymap.set('', '/', '/<Bslash>c', {noremap = true})
+vim.keymap.set('', '<leader>/', '/', {noremap = true})
+vim.keymap.set('', '?', '?<Bslash>c', {noremap = true})
+vim.keymap.set('', '<leader>?', '?', {noremap = true})
 
--- delete does not copy 
-vim.keymap.set('', '<leader>d', '"_d');
-vim.cmd('noremap x "_x')
-vim.cmd('noremap X "_X')
+-- no copy on delete
+vim.keymap.set('', '<leader>d', '"_d', {noremap = true});
+vim.keymap.set('', 'x', '"_x', {noremap = true})
+vim.keymap.set('', 'X', '"_X', {noremap = true})
 
-vim.cmd('vnoremap p "_dP')
-vim.cmd('vnoremap P "_dP')
+vim.keymap.set('v', 'p', '"_dP', {noremap = true})
+vim.keymap.set('v', 'P', '"_dP', {noremap = true})
 
-vim.cmd('noremap <leader>/ /')
-vim.cmd('nnoremap <leader>r <cmd>lua vim.diagnostic.open_float()<CR>')
+vim.keymap.set('', '<leader>/' ,'/', {noremap = true})
+vim.keymap.set('n', '<leader>r', '<cmd>lua vim.diagnostic.open_float()<CR>', {noremap = true})
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
