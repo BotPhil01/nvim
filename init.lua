@@ -20,7 +20,6 @@ vim.opt.signcolumn = 'yes'
 vim.opt.isfname:append("@-@")
 -- for use with lspzero 
 vim.opt.smartindent = false
-
 -- clipboard copy and paste is mapped to yank and paste in nvim
 -- requires xclip on linux see https://github.com/astrand/xclip
 vim.o.clipboard = 'unnamedplus'
@@ -42,7 +41,7 @@ vim.keymap.set('', '<leader>d', '"_d', {noremap = true});
 vim.keymap.set('', 'x', '"_x', {noremap = true})
 vim.keymap.set('', 'X', '"_X', {noremap = true})
 
-vim.keymap.set('v', 'p', '"_dp', {noremap = true})
+vim.keymap.set('v', 'p', '"_dP', {noremap = true})
 vim.keymap.set('v', 'P', '"_dP', {noremap = true})
 
 vim.keymap.set('', '<leader>/' ,'/', {noremap = true})
