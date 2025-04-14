@@ -1,4 +1,4 @@
--- tab optiosn
+-- tab options
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -112,6 +112,35 @@ require('telescope').setup({
 
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = 'Telescope find' })
 vim.keymap.set("n", "<leader>g", builtin.live_grep, { desc = 'Telescope grep' })
+
+local actions = require('telescope.actions')
+
+local bufferInit, telescopeSelect
+
+telescopeSelect = function (bufnr)
+    actions.select_default(bufnr)
+
+    vim.defer_fn(function ()
+        vim.cmd('bd')
+        bufferInit()
+    end, 50)
+end
+
+bufferInit = function ()
+    builtin.buffers{
+        attach_mappings = function(prompt_bufnr, map)
+            map('n', 'dd', function ()
+                telescopeSelect(prompt_bufnr)
+            end)
+            return true;
+        end
+    }
+end
+
+vim.keymap.set("n", "<leader>b", bufferInit, {desc = 'Telescope buffers' })
+
+vim.keymap.set("n", "<leader>m", builtin.man_pages , {desc = 'Telescope man' })
+
 
 local config = require("nvim-treesitter.configs")
 config.setup {
