@@ -47,6 +47,11 @@ vim.keymap.set('v', 'P', '"_dP', {noremap = true})
 vim.keymap.set('', '<leader>/' ,'/', {noremap = true})
 vim.keymap.set('n', '<leader>r', '<cmd>lua vim.diagnostic.open_float()<CR>', {noremap = true})
 
+-- suda operations
+vim.keymap.set('n', '<leader>sw', '<cmd>SudaWrite<CR>', {noremap = true})
+vim.keymap.set('n', '<leader>sr', '<cmd>SudaRead<CR>', {noremap = true})
+
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -83,6 +88,7 @@ local plugins = {
     {"williamboman/mason-lspconfig.nvim"},
     {"neovim/nvim-lspconfig"},
     {'numToStr/Comment.nvim'},
+    {'lambdalisue/vim-suda'},
 }
 
 local opts = {}
@@ -123,6 +129,8 @@ telescopeSelect = function (bufnr)
     vim.defer_fn(function ()
         vim.cmd('bd')
         bufferInit()
+        local key = vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true)
+        vim.api.nvim_feedkeys(key, 'n', false)
     end, 50)
 end
 
