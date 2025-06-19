@@ -75,10 +75,11 @@ local plugins = {
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = {
-            'nvim-lua/plenary.nvim'}
+            'nvim-lua/plenary.nvim'
+        }
     },
     {'ThePrimeagen/harpoon',
-        dependencies = { 'nvim-lua/plenary.nvim' }},
+    dependencies = { 'nvim-lua/plenary.nvim' }},
     {'nvim-treesitter/nvim-treesitter'},
     {'VonHeikemen/lsp-zero.nvim'},
     {'neovim/nvim-lspconfig'},
@@ -89,6 +90,11 @@ local plugins = {
     {"neovim/nvim-lspconfig"},
     {'numToStr/Comment.nvim'},
     {'lambdalisue/vim-suda'},
+    {
+        'Aasim-A/scrollEOF.nvim',
+        event = { 'CursorMoved', 'WinScrolled' },
+        opts = {},
+    },
 }
 
 local opts = {}
@@ -255,3 +261,17 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
+-- setup for scrolleeof
+require('scrollEOF').setup({
+  -- The pattern used for the internal autocmd to determine
+  -- where to run scrollEOF. See https://neovim.io/doc/user/autocmd.html#autocmd-pattern
+  pattern = '*',
+  -- Whether or not scrollEOF should be enabled in insert mode
+  insert_mode = true,
+  -- Whether or not scrollEOF should be enabled in floating windows
+  floating = true,
+  -- List of filetypes to disable scrollEOF for.
+  disabled_filetypes = {},
+  -- List of modes to disable scrollEOF for. see https://neovim.io/doc/user/builtin.html#mode()
+  disabled_modes = {},
+})
