@@ -22,7 +22,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.smartindent = false
 -- clipboard copy and paste is mapped to yank and paste in nvim
 -- requires xclip on linux see https://github.com/astrand/xclip
-vim.o.clipboard = 'unnamedplus'
+-- vim.o.clipboard = 'unnamedplus'
 
 vim.g.mapleader= " "
 
@@ -47,10 +47,6 @@ vim.keymap.set('v', 'P', '"_dP', {noremap = true})
 vim.keymap.set('', '<leader>/' ,'/', {noremap = true})
 vim.keymap.set('n', '<leader>r', '<cmd>lua vim.diagnostic.open_float()<CR>', {noremap = true})
 
--- suda operations
-vim.keymap.set('n', '<leader>sw', '<cmd>SudaWrite<CR>', {noremap = true})
-vim.keymap.set('n', '<leader>sr', '<cmd>SudaRead<CR>', {noremap = true})
-
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -67,10 +63,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     end
 end
 vim.opt.rtp:prepend(lazypath)
-
 local plugins = {
-    { "EdenEast/nightfox.nvim", name = "nightfox", priority = 1000 },
     -- init.lua:
+    {
+        'b0o/lavi.nvim',
+        dependencies = { 'rktjmp/lush.nvim' },
+        config = function()
+            vim.cmd [[colorscheme lavi]]
+        end,
+    },
     {'BurntSushi/ripgrep', name = "ripgrep", priority = 900 },
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
@@ -78,8 +79,10 @@ local plugins = {
             'nvim-lua/plenary.nvim'
         }
     },
-    {'ThePrimeagen/harpoon',
-    dependencies = { 'nvim-lua/plenary.nvim' }},
+    {
+        'ThePrimeagen/harpoon',
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    },
     {'nvim-treesitter/nvim-treesitter'},
     {'VonHeikemen/lsp-zero.nvim'},
     {'neovim/nvim-lspconfig'},
@@ -97,8 +100,14 @@ local plugins = {
     },
 }
 
+-- required for setting up lazy
 local opts = {}
 require("lazy").setup(plugins, opts)
+
+-- suda operations
+vim.keymap.set('n', '<leader>sw', '<cmd>SudaWrite<CR>', {noremap = true})
+vim.keymap.set('n', '<leader>sr', '<cmd>SudaRead<CR>', {noremap = true})
+
 
 
 -- telescope config
@@ -169,8 +178,9 @@ vim.keymap.set("n", "<leader>a", require("harpoon.mark").add_file, { desc = 'Har
 vim.keymap.set("n", "<leader>h", require("harpoon.ui").toggle_quick_menu, { desc = 'Harpoon menu' })
 
 -- setup for nightfox
-require("nightfox").setup()
-vim.cmd("colorscheme nightfox")
+-- require("nightfox").setup()
+-- vim.cmd("colorscheme nightfox")
+vim.cmd("colorscheme lavi")
 
 -- setup for mason
 require('mason').setup()
