@@ -22,7 +22,8 @@ vim.opt.isfname:append("@-@")
 vim.opt.smartindent = false
 -- clipboard copy and paste is mapped to yank and paste in nvim
 -- requires xclip on linux see https://github.com/astrand/xclip
--- vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard='unnamedplus'
+vim.cmd('set clipboard+="unnamedplus"')
 
 vim.g.mapleader= " "
 
