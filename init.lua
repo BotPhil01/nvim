@@ -129,6 +129,9 @@ require('telescope').setup({
             find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
 
         },
+        man_pages = {
+            sections = { "ALL" },
+        },
     }
 })
 
@@ -163,6 +166,7 @@ end
 
 vim.keymap.set("n", "<leader>b", bufferInit, {desc = 'Telescope buffers' })
 
+-- builtin.man_pages.options.sections = "ALL"
 vim.keymap.set("n", "<leader>m", builtin.man_pages , {desc = 'Telescope man' })
 
 
