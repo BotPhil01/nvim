@@ -38,7 +38,14 @@ vim.keymap.set('', '?', '?<Bslash>c', {noremap = true})
 vim.keymap.set('', '<leader>?', '?', {noremap = true})
 
 -- no copy on delete
-vim.keymap.set('', '<leader>d', '"_d', {noremap = true});
+vim.keymap.set('', '<leader>d', 'd', {noremap = true});
+vim.keymap.set('n', '<leader>dd', 'dd', {noremap = true});
+vim.keymap.set('v', '<leader>d', 'd', {noremap = true});
+
+vim.keymap.set('', 'd', '"_d', {noremap = true});
+vim.keymap.set('n', 'dd', '"_dd', {noremap = true});
+vim.keymap.set('v', 'd', '"_d', {noremap = true});
+
 vim.keymap.set('', 'x', '"_x', {noremap = true})
 vim.keymap.set('', 'X', '"_X', {noremap = true})
 
