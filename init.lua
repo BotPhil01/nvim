@@ -66,13 +66,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 local plugins = {
     -- init.lua:
-    {
-        'b0o/lavi.nvim',
-        dependencies = { 'rktjmp/lush.nvim' },
-        config = function()
-            vim.cmd [[colorscheme lavi]]
-        end,
-    },
+    {'rebelot/kanagawa.nvim', name = 'colorscheme'},
     {'BurntSushi/ripgrep', name = "ripgrep", priority = 900 },
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
@@ -182,16 +176,14 @@ config.setup {
 vim.keymap.set("n", "<leader>a", require("harpoon.mark").add_file, { desc = 'Harpoon add' })
 vim.keymap.set("n", "<leader>h", require("harpoon.ui").toggle_quick_menu, { desc = 'Harpoon menu' })
 
--- setup for nightfox
--- require("nightfox").setup()
--- vim.cmd("colorscheme nightfox")
-vim.cmd("colorscheme lavi")
+-- colorscheme
+vim.cmd("colorscheme kanagawa-wave")
 
 -- setup for mason
 require('mason').setup()
 
 require('mason-lspconfig').setup({
-    ensure_installed = { 'lua_ls' },
+    ensure_installed = { 'lua_ls', 'bashls', 'pylsp', 'clangd' },
     handlers = {
         function(server_name)
             require('lspconfig')[server_name].setup({
