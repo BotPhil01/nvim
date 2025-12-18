@@ -28,7 +28,7 @@ vim.cmd('set clipboard+="unnamedplus"')
 vim.g.mapleader= " "
 
 -- file explorer
-vim.keymap.set('n', '<leader>e', vim.cmd.Ex, {noremap = true})
+vim.keymap.set('n', '<leader>e', '<cmd>lua vim.cmd("Ex .")<CR>' , {noremap = true})
 -- terminal exit
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', {noremap = true})
 -- case insensitive find
