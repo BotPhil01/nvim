@@ -193,6 +193,15 @@ require('mason-lspconfig').setup({
     ensure_installed = { 'lua_ls', 'bashls', 'pylsp', 'clangd' },
     handlers = {
         function(server_name)
+            -- if (server_name == "clangd")
+            --     require('lspconfig').clangd.setup({
+            --         cmd = {'clangd', '--background-index', '--clang-tidy', '--log-verbose'},
+            --         init_options = {
+            --             fallbackFlags = { '-std=c++17' },
+            --         }
+            --
+            --     })
+            -- end
             require('lspconfig')[server_name].setup({
                 settings = {
                     Lua = {
@@ -213,6 +222,7 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
     lspconfig_defaults.capabilities,
     require('cmp_nvim_lsp').default_capabilities()
 )
+
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
