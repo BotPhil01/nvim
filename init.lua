@@ -85,7 +85,12 @@ local plugins = {
         'ThePrimeagen/harpoon',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
-    {'nvim-treesitter/nvim-treesitter'},
+    {
+        'nvim-treesitter/nvim-treesitter',
+        lazy = false,
+        tag = 'v0.10.0',
+        build = ':TSUpdate'
+    },
     {'VonHeikemen/lsp-zero.nvim'},
     {'neovim/nvim-lspconfig'},
     {'hrsh7th/cmp-nvim-lsp'},
@@ -170,6 +175,19 @@ vim.keymap.set("n", "<leader>b", bufferInit, {desc = 'Telescope buffers' })
 -- builtin.man_pages.options.sections = "ALL"
 vim.keymap.set("n", "<leader>m", builtin.man_pages , {desc = 'Telescope man' })
 
+-- require'nvim-treesitter'.install { "lua", "vim", "vimdoc", "c", "cpp", "javascript", "typescript", "java", "python", "markdown", "markdown_inline" }
+-- vim.api.nvim_create_autocmd('FileType', {
+--     pattern = { "lua", "vim", "vimdoc", "c", "cpp", "javascript", "typescript", "java", "python", "markdown", "markdown_inline" },
+--     callback = function()
+--         -- syntax highlighting, provided by Neovim
+--         vim.treesitter.start()
+--         -- folds, provided by Neovim
+--         -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+--         -- vim.wo.foldmethod = 'indent'
+--         -- indentation, provided by nvim-treesitter
+--         -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+--     end,
+-- })
 
 local config = require("nvim-treesitter.configs")
 config.setup {
