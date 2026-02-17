@@ -30,7 +30,7 @@ vim.g.mapleader= " "
 -- file explorer
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.cmd("Ex")<CR>' , {noremap = true})
 -- terminal exit
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', {noremap = true})
+vim.keymap.set('t', '<A-q>', '<C-\\><C-n>', {noremap = true})
 -- case insensitive find
 vim.keymap.set('', '/', '/<Bslash>c', {noremap = true})
 vim.keymap.set('', '<leader>/', '/', {noremap = true})
