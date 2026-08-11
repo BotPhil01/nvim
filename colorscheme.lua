@@ -1,4 +1,5 @@
-vim.cmd("colorscheme abbott");
+vim.cmd('colorscheme ghostty_sync')
+vim.opt.termguicolors = true;
 
 -- setup for mini.icons
 require('mini.icons').setup()
@@ -17,4 +18,3 @@ require('scrollEOF').setup({
   -- List of modes to disable scrollEOF for. see https://neovim.io/doc/user/builtin.html#mode()
   disabled_modes = { 't', 'nt' },
 })
-

@@ -2,6 +2,7 @@
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "abbott.vim": { "branch": "master", "commit": "80d8dbe632e0e6a6f5241018ccde1dc9aeed2413" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "cbc7b02bb99fae35cb42f514762b89b5126651ef" },
+  "ghostty-theme-sync.nvim": { "branch": "main", "commit": "868b2ac2bd0e35e90ec0a64ab47300cc439d4b21" },
   "harpoon": { "branch": "master", "commit": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lsp-zero.nvim": { "branch": "v4.x", "commit": "d388e2b71834c826e61a3eba48caec53d7602510" },
