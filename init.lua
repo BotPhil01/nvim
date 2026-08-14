@@ -6,7 +6,7 @@ local function get_configs(config_prefix)
         return ret
     end
     for cfg in p:lines() do
-        if string.find(cfg, "init") == nil then
+        if string.find(cfg, "init") == nil and string.find(cfg, "lazy") == nil then
             table.insert(ret, cfg)
         end
     end
