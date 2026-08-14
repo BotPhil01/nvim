@@ -1,4 +1,4 @@
-vim.cmd('colorscheme ghostty_sync')
+vim.cmd('colorscheme abbott')
 vim.opt.termguicolors = true;
 
 -- setup for mini.icons

@@ -59,13 +59,6 @@ local plugins = {
 		---@type render.md.UserConfig
 		opts = {},
 	},
-	{
-		"atbraz/ghostty-theme-sync.nvim",
-		lazy = false,
-		config = function()
-			require("ghostty-theme-sync").setup()
-		end,
-	},
 }
 
 -- required for setting up lazy
