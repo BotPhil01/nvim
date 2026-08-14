@@ -18,6 +18,7 @@ local config_prefix = os.getenv("HOME") .. "/.config/nvim/"
 
 local configs = get_configs(config_prefix)
 
+vim.cmd('source ' .. config_prefix .. "lazy.lua")
 for i=1, #(configs) do
 	vim.cmd('source '  .. configs[i])
 end
